@@ -6,6 +6,8 @@ Authors
 * Xiao-Fei Su
 * Zhao-Long Gu
 * Zhao-Yang Dong
+* Shun-Li Yu
+* Jian-Xin Li
 
 Contact
 -------
