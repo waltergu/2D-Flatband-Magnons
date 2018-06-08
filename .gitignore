@@ -1,0 +1,20 @@
+# python
+*.py[cod]
+build/
+data/
+log/
+
+# pycharm
+.idea/
+
+# tex
+*.aux
+*.bak
+*.bbl
+*.out
+*.sav
+*.gz
+*.rar
+*.log
+*.blg
+*Notes.bib
