@@ -28,9 +28,8 @@ def fbfmtasks(name,parameters,lattice,terms,interactions,nk=50,scalefree=1.0,sca
         fbfm.summary()
     if 'KPOS' in jobs:
         path=[fbfm.basis.BZ[pos] for pos in fbfm.basis.BZ.path(KMap(fbfm.lattice.reciprocals,'S:G-X,X-M,M-G'),mode='I')]
-        pos=len(path)/6*5
-        mode='D'
-        fbfm.register(KPOS(name='KPOS%s'%nk,k=path[pos],ns=(0,1,3,4),plot=True,scalefree=0.001,mode=mode,run=FBFMKPOS))
+        mode,pos='D',len(path)/6*5
+        fbfm.register(KPOS(name='KPOS%s%s'%(nk,mode),k=path[pos],ns=(0,1,2,3),plot=True,scalefree=0.001,mode=mode,run=FBFMKPOS))
         fbfm.summary()
 
 if __name__=='__main__':
@@ -38,32 +37,27 @@ if __name__=='__main__':
     Engine.DEBUG=True
     Engine.MKDIR=False
 
-    from ConfigParser import SafeConfigParser
-    config=SafeConfigParser()
-    config.read('input.cfg')
-    jobs=config.get('controllers','jobs')
-
     # parameters
     parameters=OrderedDict()
     parameters['t1']=-1.0
-    parameters['t2']=float(config.get('parameters','t2'))
+    parameters['t2']=-0.65
 
     # tba
-    m=int(config.get('controllers','m'))
-    if 'CITBA0' in jobs: tbatasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],jobs=['EB'])
-    if 'CITBA1' in jobs: tbatasks(name1,parameters,S2xxy('%sO-1P'%m,nneighbour),[t1c,t2],jobs=['EB'])
-    if 'TITBA0' in jobs: tbatasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],jobs=['EB'])
-    if 'TITBA1' in jobs: tbatasks(name2,parameters,S2xxy('%sO-1P'%m,nneighbour),[t1t,t2],jobs=['EB'])
+    m=50
+    #tbatasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],jobs=['EB'])
+    #tbatasks(name1,parameters,S2xxy('%sO-1P'%m,nneighbour),[t1c,t2],jobs=['EB'])
+    #tbatasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],jobs=['EB'])
+    #tbatasks(name2,parameters,S2xxy('%sO-1P'%m,nneighbour),[t1t,t2],jobs=['EB'])
 
     # fbfm
-    nk=int(config.get('controllers','nk'))
-    parameters['U']=float(config.get('parameters','U'))
-    if 'CIEB0' in jobs: fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['EB'])
-    if 'CIEB1' in jobs: fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=0.0,scaleint=1.0,jobs=['EB'])
-    if 'CIEB2' in jobs: fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=0.0,jobs=['EB'])
-    if 'CIKPOS' in jobs: fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['KPOS'])
+    nk=40
+    parameters['U']=2.0
+    #fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['EB'])
+    #fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=0.0,scaleint=1.0,jobs=['EB'])
+    #fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=0.0,jobs=['EB'])
+    #fbfmtasks(name1,parameters,S2xxy('1P-1P',nneighbour),[t1c,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['KPOS'])
 
-    if 'TIEB0' in jobs: fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['EB'])
-    if 'TIEB1' in jobs: fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=0.0,scaleint=1.0,jobs=['EB'])
-    if 'TIEB2' in jobs: fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=0.0,jobs=['EB'])
-    if 'TIKPOS' in jobs: fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['KPOS'])
+    #fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['EB'])
+    #fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=0.0,scaleint=1.0,jobs=['EB'])
+    #fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=0.0,jobs=['EB'])
+    #fbfmtasks(name2,parameters,S2xxy('1P-1P',nneighbour),[t1t,t2],[U],nk=nk,scalefree=1.0,scaleint=1.0,jobs=['KPOS'])

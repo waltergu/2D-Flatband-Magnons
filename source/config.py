@@ -79,7 +79,7 @@ def FBFMPPOS(engine,app):
     result=vs1-vs0
     name='%s_%s_%s'%(engine.tostr(),app.name,repr(app.k))
     if app.savedata:
-        with open('%s/%s.bin'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
+        with open('%s/%s.pkb'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
     if app.plot:
         plt.title(name)
         plt.plot(range(len(path)),result)
@@ -113,7 +113,7 @@ def FBFMKPOS(engine,app):
     result=[vs0,vs1] if len(app.mode)>1 else vs0 if app.mode=='F' else vs1 if app.mode=='N' else vs1-vs0
     name='%s_%s_%s'%(engine.tostr(),app.name,repr(app.k))
     if app.savedata:
-        with open('%s/%s.bin'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
+        with open('%s/%s.pkb'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
     if app.plot:
         plt.axis('equal')
         for i,ne in enumerate(app.ns):
