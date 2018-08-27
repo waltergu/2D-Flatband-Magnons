@@ -20,7 +20,7 @@ def tbatasks(name,parameters,lattice,terms,jobs=()):
 def fbfmtasks(name,parameters,lattice,terms,interactions,nk=50,scalefree=1.0,scaleint=1.0,jobs=()):
     import HamiltonianPy.FBFM as FB
     assert  len(lattice.vectors)==2
-    ns,ne=len(lattice),len(lattice)/2
+    ns,ne=len(lattice),len(lattice)//2
     basis=FB.FBFMBasis(BZ=FBZ(lattice.reciprocals,nks=(nk,nk)),filling=Fraction(ne,ns*2))
     fbfm=fbfmconstruct(name,parameters,basis,lattice,terms,interactions)
     if 'EB' in jobs:
@@ -28,7 +28,7 @@ def fbfmtasks(name,parameters,lattice,terms,interactions,nk=50,scalefree=1.0,sca
         fbfm.summary()
     if 'KPOS' in jobs:
         path=[fbfm.basis.BZ[pos] for pos in fbfm.basis.BZ.path(KMap(fbfm.lattice.reciprocals,'S:G-X,X-M,M-G'),mode='I')]
-        mode,pos='D',len(path)/6*5
+        mode,pos='D',len(path)//6*5
         fbfm.register(KPOS(name='KPOS%s%s'%(nk,mode),k=path[pos],ns=(0,1,2,3),plot=True,scalefree=0.001,mode=mode,run=FBFMKPOS))
         fbfm.summary()
 

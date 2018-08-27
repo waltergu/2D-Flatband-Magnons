@@ -69,7 +69,6 @@ class PPOS(POS):
 
 def FBFMPPOS(engine,app):
     import matplotlib.pyplot as plt
-    import pickle as pk
     from scipy.linalg import eigh
     path=np.array(engine.basis.BZ.path(KMap(engine.lattice.reciprocals,app.path),mode='I'))
     matrix=engine.matrix(k=app.k,scalefree=app.scalefree)
@@ -79,7 +78,7 @@ def FBFMPPOS(engine,app):
     result=vs1-vs0
     name='%s_%s_%s'%(engine.tostr(),app.name,repr(app.k))
     if app.savedata:
-        with open('%s/%s.pkb'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
+        np.save('%s/%s.npy'%(engine.dout,name),result)
     if app.plot:
         plt.title(name)
         plt.plot(range(len(path)),result)
@@ -99,7 +98,6 @@ class KPOS(POS):
 def FBFMKPOS(engine,app):
     import matplotlib.pyplot as plt
     import itertools as it
-    import pickle as pk
     from scipy.linalg import eigh
     shape=tuple(it.chain([len(app.ns)],engine.basis.BZ.contents.max(axis=0)+1))
     permutation=np.argsort((engine.basis.BZ+engine.basis.BZ.type((shape[1]/2,shape[2]/2))).sorted(history=True)[1])
@@ -113,7 +111,7 @@ def FBFMKPOS(engine,app):
     result=[vs0,vs1] if len(app.mode)>1 else vs0 if app.mode=='F' else vs1 if app.mode=='N' else vs1-vs0
     name='%s_%s_%s'%(engine.tostr(),app.name,repr(app.k))
     if app.savedata:
-        with open('%s/%s.pkb'%(engine.dout,name),'wb') as fout: pk.dump(result,fout,2)
+        np.save('%s/%s.npy'%(engine.dout,name),result)
     if app.plot:
         plt.axis('equal')
         for i,ne in enumerate(app.ns):

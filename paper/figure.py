@@ -19,7 +19,7 @@ def lattice():
     ax.set_xlim(-0.1,2.1)
     ax.set_ylim(-0.1,2.1)
     P,t1,t2=np.array([0.0,0.0]),np.array([1.0,0.0]),np.array([0.0,1.0])
-    lattice=HP.Lattice(name='2DFB',rcoords=HP.tiling(cluster=[P],vectors=[t1,t2],translations=it.product(xrange(3),xrange(3))),neighbours=2)
+    lattice=HP.Lattice(name='2DFB',rcoords=HP.tiling(cluster=[P],vectors=[t1,t2],translations=it.product(range(3),range(3))),neighbours=2)
     for bond in lattice.bonds:
         p1,p2=bond.spoint,bond.epoint
         if bond.neighbour==0:
@@ -56,15 +56,15 @@ def lattice():
         ax.plot([sp[0],ep[0]],[sp[1],ep[1]],lw=2,color='black',zorder=1)
     for x,y in ([0.5,0.5],[-0.5,0.5],[-0.5,-0.5],[0.5,-0.5]):
         ax.scatter(x,y,s=50,edgecolors='none',color='black',alpha=1.0,marker='o',zorder=3)
-    ax.text(-0.05,+0.05,'$\Gamma$',fontsize=18,va='bottom',ha='right',color='black')
-    ax.text(+0.90,-0.10,'$X_1$',fontsize=18,va='top',ha='right',color='black')
-    ax.text(-0.90,-0.10,'$X_2$',fontsize=18,va='top',ha='left',color='black')
-    ax.text(-0.10,+1.05,'$Y_1$',fontsize=18,va='bottom',ha='right',color='black')
-    ax.text(-0.10,-1.05,'$Y_2$',fontsize=18,va='top',ha='right',color='black')
-    ax.text(+1.00,+1.05,'$M_1$',fontsize=18,va='bottom',ha='center',color='black')
-    ax.text(-1.00,+1.05,'$M_2$',fontsize=18,va='bottom',ha='center',color='black')
-    ax.text(-1.00,-1.05,'$M_3$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(+1.00,-1.05,'$M_4$',fontsize=18,va='top',ha='center',color='black')
+    ax.text(-0.03,+0.03,'$\Gamma$',fontsize=18,va='bottom',ha='right',color='black')
+    ax.text(+0.97,-0.03,'$X_1$',fontsize=18,va='top',ha='right',color='black')
+    ax.text(-1.03,-0.03,'$X_2$',fontsize=18,va='top',ha='right',color='black')
+    ax.text(-0.05,+1.03,'$Y_1$',fontsize=18,va='bottom',ha='right',color='black')
+    ax.text(-0.05,-1.03,'$Y_2$',fontsize=18,va='top',ha='right',color='black')
+    ax.text(+1.00,+1.03,'$M_1$',fontsize=18,va='bottom',ha='center',color='black')
+    ax.text(-1.00,+1.03,'$M_2$',fontsize=18,va='bottom',ha='center',color='black')
+    ax.text(-1.00,-1.03,'$M_3$',fontsize=18,va='top',ha='center',color='black')
+    ax.text(+1.00,-1.03,'$M_4$',fontsize=18,va='top',ha='center',color='black')
     ax.text(+0.60,+0.45,'$O_1$',fontsize=18,va='top',ha='center',color='black')
     ax.text(-0.55,+0.45,'$O_2$',fontsize=18,va='top',ha='center',color='black')
     ax.text(-0.50,-0.55,'$O_3$',fontsize=18,va='top',ha='center',color='black')
@@ -113,6 +113,7 @@ def phase():
         else:
             ax.scatter([0.650],[2.0],s=75,marker='*',edgecolors='green',color='green',alpha=0.9,zorder=4)
             ax.scatter([0.741],[2.0],s=75,marker='*',edgecolors='green',color='green',alpha=1.0,zorder=4)
+        ax.text(0.42,2.45,'(%s)'%('a' if i==0 else 'b'),ha='left',va='bottom',fontsize=18,color='black')
 
         t2s,Us=np.linspace(0.4,0.8,101),np.linspace(1.4,2.6,121)
         ks=HP.square_gxm(nk=200).mesh('k')
@@ -129,7 +130,7 @@ def phase():
         Zs=np.tensordot(flatness,Us,axes=0)
         pcolor=ax.pcolormesh(Xs,Ys,Zs,alpha=1.0,cmap='coolwarm')
         if i==1:
-            cbarax=fig.add_axes([0.91,0.195,0.04,0.70])
+            cbarax=fig.add_axes([0.91,0.195,0.03,0.70])
             colorbar=fig.colorbar(pcolor,cax=cbarax)
             colorbar.ax.set_title('$U/W$',fontdict={'fontsize':20})
 
@@ -180,13 +181,11 @@ def fmcispectrum():
     ax.text(len(data)-2,0.51,'(a)',ha='right',va='bottom',fontsize=18,color='black')
 
     nk=40
-    import pickle as pk
     import matplotlib.colorbar as mc
     igs=mg.GridSpecFromSubplotSpec(1,4,gs[1,:],wspace=0.3,hspace=0.2)
-    xs,ys=np.tile(np.array(xrange(nk+1)),nk+1),np.repeat(np.array(xrange(nk+1)),nk+1)
-    with open('../result/fbfm/2DCI_S2xxy(1P-1P)_up_-1.0_%s_%s_FBFM_KPOS%sN_kp(0,0).pkb'%(HP.decimaltostr(t),HP.decimaltostr(U),nk),'rb') as fin:
-        data=pk.load(fin)
-    for i in xrange(4):
+    xs,ys=np.tile(np.array(range(nk+1)),nk+1),np.repeat(np.array(range(nk+1)),nk+1)
+    data=np.load('../result/fbfm/2DCI_S2xxy(1P-1P)_up_-1.0_%s_%s_FBFM_KPOS%sN_kp(0,0).npy'%(HP.decimaltostr(t),HP.decimaltostr(U),nk))
+    for i in range(4):
         result=np.zeros((nk+1,nk+1))
         result[:nk,:nk]=data[i,:,:]
         result[nk,:nk]=result[0,:nk]
@@ -208,9 +207,9 @@ def fmcispectrum():
         ax.set_xlim(0,nk)
         ax.set_ylim(0,nk)
         ax.set_aspect('equal',adjustable='box')
-        ax.set_xticks([0,nk/2,nk])
+        ax.set_xticks([0,nk//2,nk])
         ax.set_xticklabels(['$-1$','$0$','$1$'])
-        ax.set_yticks([0,nk/2,nk])
+        ax.set_yticks([0,nk//2,nk])
         ax.set_yticklabels(['$-1$','$0$','$1$'])
         for tick in ax.get_xticklabels():
             tick.set_fontsize(14)
@@ -241,8 +240,8 @@ def bspicture():
     ax=fig.add_subplot(gs[0,0])
     data=np.loadtxt('../result/tba/2DCI_S2xxy(1P-1P)_-1.0_%s_TBA_EB.dat'%HP.decimaltostr(t))
     emin=data[:,1].min()
-    ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label='$\uparrow$')
-    ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label='$\downarrow$')
+    ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label=r'$\uparrow$')
+    ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label=r'$\downarrow$')
     ax.axvline(x=100,ls='--',color='grey',lw=1,alpha=0.9)
     ax.axvline(x=200,ls='--',color='grey',lw=1,alpha=0.9)
     ax.minorticks_on()
@@ -304,13 +303,11 @@ def bspicture():
     ax.text(-1.35,1.35,'(b)',ha='right',va='top',fontsize=18,color='black')
 
     nk=40
-    import pickle as pk
     import matplotlib.colorbar as mc
     igs=mg.GridSpecFromSubplotSpec(1,4,gs[1,:],wspace=0.1,hspace=0.2)
-    xs,ys=np.tile(np.array(xrange(nk+1)),nk+1),np.repeat(np.array(xrange(nk+1)),nk+1)
-    with open('../result/fbfm/2DCI_S2xxy(1P-1P)_up_-1.0_%s_%s_FBFM_KPOS%sD_kp(%s,0).pkb'%(HP.decimaltostr(t),HP.decimaltostr(U),nk,nk/2),'rb') as fin:
-        data=pk.load(fin)
-    for i in xrange(4):
+    xs,ys=np.tile(np.array(range(nk+1)),nk+1),np.repeat(np.array(range(nk+1)),nk+1)
+    data=np.load('../result/fbfm/2DCI_S2xxy(1P-1P)_up_-1.0_%s_%s_FBFM_KPOS%sD_kp(%s,0).npy'%(HP.decimaltostr(t),HP.decimaltostr(U),nk,nk//2))
+    for i in range(4):
         result=np.zeros((nk+1,nk+1))
         result[:nk,:nk]=data[i,:,:]
         result[nk,:nk]=result[0,:nk]
@@ -332,9 +329,9 @@ def bspicture():
         ax.set_xlim(0,nk)
         ax.set_ylim(0,nk)
         ax.set_aspect('equal',adjustable='box')
-        ax.set_xticks([0,nk/2,nk])
+        ax.set_xticks([0,nk//2,nk])
         ax.set_xticklabels(['$-1$','$0$','$1$'])
-        ax.set_yticks([0,nk/2,nk])
+        ax.set_yticks([0,nk//2,nk])
         ax.set_yticklabels(['$-1$','$0$','$1$'])
         for tick in ax.get_xticklabels():
             tick.set_fontsize(14)
@@ -358,7 +355,7 @@ def pbcispectrum():
 
     fig=plt.figure()
     gs=mg.GridSpec(4,2,width_ratios=[2,1],height_ratios=[1,1,1,1])
-    fig.subplots_adjust(left=0.105,right=0.98,top=0.985,bottom=0.090,hspace=0.290,wspace=0.350)
+    fig.subplots_adjust(left=0.105,right=0.98,top=0.985,bottom=0.080,hspace=0.290,wspace=0.350)
 
     U,nk=2.3,52
     posx,posm=26,52
@@ -408,8 +405,8 @@ def pbcispectrum():
         ax=fig.add_subplot(gs[i*2+1,1])
         data=np.loadtxt('../result/tba/2DCI_S2xxy(1P-1P)_-1.0_%s_TBA_EB.dat'%HP.decimaltostr(t))
         emin=data[:,1].min()
-        ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label='$\uparrow$')
-        ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label='$\downarrow$')
+        ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label=r'$\uparrow$')
+        ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label=r'$\downarrow$')
         ax.axvline(x=100,ls='--',color='grey',lw=1,alpha=0.9)
         ax.axvline(x=200,ls='--',color='grey',lw=1,alpha=0.9)
         leg=ax.legend(loc='lower left',fancybox=True,shadow=False,prop={'size': 12})
@@ -439,7 +436,7 @@ def tispectrum():
 
     fig=plt.figure()
     gs=mg.GridSpec(4,2,width_ratios=[2,1],height_ratios=[1,1,1,1])
-    fig.subplots_adjust(left=0.11,right=0.98,top=0.985,bottom=0.095,hspace=0.245,wspace=0.350)
+    fig.subplots_adjust(left=0.11,right=0.98,top=0.985,bottom=0.085,hspace=0.245,wspace=0.350)
 
     ts,U,nk=[0.65,0.741],2.0,52
     posx,posm=26,52
@@ -468,15 +465,15 @@ def tispectrum():
         if i==1:ax.set_xlabel('q',fontdict={'fontsize':16})
         ax.set_ylabel('$E/U$',fontdict={'fontsize':16})
         ystart=0.08 if i==0 else 0.01
-        ax.annotate(s='',xy=[posx/2*5,ystart],xytext=[posx/2*5,ystart+0.11],arrowprops={'color':'black','linewidth':2,'arrowstyle':'->','zorder':3})
-        ax.text(posx/2*5,ystart+0.11,'$q_1$',ha='center',va='bottom',fontsize=14,color='black')
+        ax.annotate(s='',xy=[posx/2*5,ystart],xytext=[posx/2*5,ystart+0.06],arrowprops={'color':'black','linewidth':2,'arrowstyle':'->','zorder':3})
+        ax.text(posx/2*5,ystart+0.06,'$q_1$',ha='center',va='bottom',fontsize=14,color='black')
         ax.text(len(data)-2,0.59,'(%s$_1$)'%tag,ha='right',va='top',fontsize=18,color='black')
 
         data=np.loadtxt('../result/tba/2DTI_S2xxy(1P-1P)_-1.0_-%s_TBA_EB.dat'%HP.decimaltostr(t))
         ax=fig.add_subplot(gs[i*2+1,1])
         emin=data[:,1].min()
-        ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label='$\uparrow$')
-        ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label='$\downarrow$')
+        ax.plot(data[:,0],(data[:,1]-emin)/U,lw=1.5,color='blue',zorder=1,label=r'$\uparrow$')
+        ax.plot(data[:,0],(data[:,1]-emin)/U+0.5,lw=1.5,color='blue',ls='--',zorder=1,label=r'$\downarrow$')
         ax.axvline(x=100,ls='--',color='grey',lw=1,alpha=0.9)
         ax.axvline(x=200,ls='--',color='grey',lw=1,alpha=0.9)
         ax.minorticks_on()

@@ -1,3 +1,3 @@
-from config import *
-from tba import *
-from fbfm import *
+from .config import *
+from .tba import *
+from .fbfm import *
