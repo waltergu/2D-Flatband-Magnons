@@ -390,7 +390,7 @@ def pbcispectrum():
         ax.set_xlim(0,posx)
         ax.set_ylim(0,0.04)
         ax.set_xticks([0,posx/2.0,posx])
-        ax.set_xticklabels(['$\Gamma$','$q$','$X$'])
+        ax.set_xticklabels(['$\Gamma$','$q$','$X_1$'])
         ax.set_yticks([0.0,0.02,0.04])
         ax.set_yticklabels(['0','0.02','0.04'])
         for tick in ax.get_xticklabels():
