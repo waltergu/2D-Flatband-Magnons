@@ -21,3 +21,5 @@ log/
 *.log
 *.blg
 *Notes.bib
+
+.ipynb_checkpoints/

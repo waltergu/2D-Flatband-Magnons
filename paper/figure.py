@@ -54,21 +54,12 @@ def lattice():
     p0,p1,p2,p3,p4=np.array([0.0,0.0]),np.array([-1.0,-1.0]),np.array([-1.0,1.0]),np.array([1.0,1.0]),np.array([1.0,-1.0])
     for sp,ep in [(p1,p2),(p2,p3),(p3,p4),(p4,p1),(p0,p3)]:
         ax.plot([sp[0],ep[0]],[sp[1],ep[1]],lw=2,color='black',zorder=1)
-    for x,y in ([0.5,0.5],[-0.5,0.5],[-0.5,-0.5],[0.5,-0.5]):
-        ax.scatter(x,y,s=50,edgecolors='none',color='black',alpha=1.0,marker='o',zorder=3)
-    ax.text(-0.03,+0.03,'$\Gamma$',fontsize=18,va='bottom',ha='right',color='black')
-    ax.text(+0.97,-0.03,'$X_1$',fontsize=18,va='top',ha='right',color='black')
-    ax.text(-1.03,-0.03,'$X_2$',fontsize=18,va='top',ha='right',color='black')
-    ax.text(-0.05,+1.03,'$Y_1$',fontsize=18,va='bottom',ha='right',color='black')
-    ax.text(-0.05,-1.03,'$Y_2$',fontsize=18,va='top',ha='right',color='black')
-    ax.text(+1.00,+1.03,'$M_1$',fontsize=18,va='bottom',ha='center',color='black')
-    ax.text(-1.00,+1.03,'$M_2$',fontsize=18,va='bottom',ha='center',color='black')
-    ax.text(-1.00,-1.03,'$M_3$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(+1.00,-1.03,'$M_4$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(+0.60,+0.45,'$O_1$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(-0.55,+0.45,'$O_2$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(-0.50,-0.55,'$O_3$',fontsize=18,va='top',ha='center',color='black')
-    ax.text(+0.60,-0.55,'$O_4$',fontsize=18,va='top',ha='center',color='black')
+    ax.scatter(0.5,0.5,s=50,edgecolors='none',color='black',alpha=1.0,marker='o',zorder=3)
+    ax.text(-0.05,-0.05,'$\Gamma$',fontsize=18,va='top',ha='right',color='black')
+    ax.text(+0.95,-0.05,'$X$',fontsize=18,va='top',ha='right',color='black')
+    ax.text(-0.05,+1.03,'$Y$',fontsize=18,va='bottom',ha='right',color='black')
+    ax.text(+1.00,+1.03,'$M$',fontsize=18,va='bottom',ha='center',color='black')
+    ax.text(+0.60,+0.45,'$O$',fontsize=18,va='top',ha='center',color='black')
     ax.text(1.45,-0.1,'$k_x$',fontsize=12,va='top',ha='right',color='black')
     ax.text(0.1,1.45,'$k_y$',fontsize=12,va='top',ha='left',color='black')
     ax.text(-1.5,1.8,'(b)',ha='left',va='top',fontsize=18,color='black')
@@ -165,7 +156,7 @@ def fmcispectrum():
     ax.set_xlim(0,len(data)-1)
     ax.set_ylim(0.0,0.6)
     ax.set_xticks([0,posx,posm,len(data)-1])
-    ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'])
+    ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'])
     ax.set_yticks(np.linspace(0.0,0.6,4))
     ax.set_yticklabels(['0','0.2','0.4','0.6'])
     for tick in ax.get_xticklabels():
@@ -248,7 +239,7 @@ def bspicture():
     ax.set_xlim(0,300)
     ax.set_ylim(0.0,1.0)
     ax.set_xticks([0,100,200,300])
-    ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'])
+    ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'])
     ax.set_yticks([0.0,0.5,1.0])
     ax.set_yticklabels(['0.0','0.5','1.0'])
     for tick in ax.get_xticklabels():
@@ -276,22 +267,14 @@ def bspicture():
     for (x1,y1),(x2,y2) in [(p1,p2),(p2,p3),(p3,p4),(p4,p1)]:
         ax.plot([x1,x2],[y1,y2],lw=2,color='black')
     ax.text(-0.04,+0.00,'$\Gamma$',ha='right',va='center',fontsize=14,color='black')
-    ax.text(+1.00,+1.04,'$M_1$',ha='center',va='bottom',fontsize=14,color='black')
-    ax.text(-1.00,+1.04,'$M_2$',ha='center',va='bottom',fontsize=14,color='black')
-    ax.text(-1.00,-1.04,'$M_3$',ha='center',va='top',fontsize=14,color='black')
-    ax.text(+1.00,-1.04,'$M_4$',ha='center',va='top',fontsize=14,color='black')
-    ax.text(+1.04,+0.00,'$X_1$',ha='left',va='center',fontsize=14,color='black')
-    ax.text(-1.04,+0.00,'$X_2$',ha='right',va='center',fontsize=14,color='black')
-    ax.text(+0.00,+0.96,'$Y_1$',ha='center',va='top',fontsize=14,color='black')
-    ax.text(+0.00,-0.96,'$Y_2$',ha='center',va='bottom',fontsize=14,color='black')
+    ax.text(+1.00,+1.04,'$M$',ha='center',va='bottom',fontsize=14,color='black')
+    ax.text(+1.04,+0.00,'$X$',ha='left',va='center',fontsize=14,color='black')
+    ax.text(+0.00,+1.04,'$Y$',ha='center',va='bottom',fontsize=14,color='black')
     for x,y in ([0.0,0.0],[1.0,1.0],[-1.0,1.0],[-1.0,-1.0],[1.0,-1.0]):
         ax.scatter(x,y,s=50,edgecolors='none',color='purple',alpha=0.8,marker='o',zorder=3)
     for x,y in ([1.0,0.0],[-1.0,0.0],[0.0,1.0],[0.0,-1.0],[0.5,0.5],[-0.5,0.5],[-0.5,-0.5],[0.5,-0.5]):
         ax.scatter(x,y,s=50,edgecolors='none',color='red',alpha=0.8,marker='o',zorder=3)
-    ax.text(+0.5,+0.54,'$O_1$',ha='center',va='bottom',fontsize=14,color='black')
-    ax.text(-0.5,+0.54,'$O_2$',ha='center',va='bottom',fontsize=14,color='black')
-    ax.text(-0.5,-0.54,'$O_3$',ha='center',va='bottom',fontsize=14,color='black')
-    ax.text(+0.5,-0.54,'$O_4$',ha='center',va='bottom',fontsize=14,color='black')
+    ax.text(+0.5,+0.54,'$O$',ha='center',va='bottom',fontsize=14,color='black')
     ax.annotate(s='',xy=[+0.0,+0.0],xytext=[+1.0,+0.0],arrowprops={'color':'green','linewidth':2.5,'arrowstyle':'<-','zorder':3})
     ax.annotate(s='',xy=[-1.0,-1.0],xytext=[+0.0,-1.0],arrowprops={'color':'green','linewidth':2.5,'arrowstyle':'<-','zorder':3})
     ax.text(+0.5,+0.0,'$q_1$',ha='center',va='center',fontsize=14,color='black')
@@ -371,7 +354,7 @@ def pbcispectrum():
         ax.set_xlim(0,len(data)-1)
         ax.set_ylim(0.0,0.5)
         ax.set_xticks([0,posx,posm,len(data)-1])
-        ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'] if i==1 else ['']*4)
+        ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'] if i==1 else ['']*4)
         ax.set_yticks(np.linspace(0.0,0.5,6))
         ax.set_yticklabels(['0','0.1','0.2','0.3','0.4','0.5'])
         for tick in ax.get_xticklabels():
@@ -390,7 +373,7 @@ def pbcispectrum():
         ax.set_xlim(0,posx)
         ax.set_ylim(0,0.04)
         ax.set_xticks([0,posx/2.0,posx])
-        ax.set_xticklabels(['$\Gamma$','$q$','$X_1$'])
+        ax.set_xticklabels(['$\Gamma$','$q$','$X$'])
         ax.set_yticks([0.0,0.02,0.04])
         ax.set_yticklabels(['0','0.02','0.04'])
         for tick in ax.get_xticklabels():
@@ -415,7 +398,7 @@ def pbcispectrum():
         ax.set_xlim(0,300)
         ax.set_ylim(0.0,1.0)
         ax.set_xticks([0,100,200,300])
-        ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'])
+        ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'])
         ax.set_yticks([0.0,0.5,1.0])
         ax.set_yticklabels(['0.0','0.5','1.0'])
         for tick in ax.get_xticklabels():
@@ -455,7 +438,7 @@ def tispectrum():
         ax.set_xlim(0,len(data)-1)
         ax.set_ylim(0.0,0.6)
         ax.set_xticks([0,posx,posm,len(data)])
-        ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'] if i==1 else ['']*4)
+        ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'] if i==1 else ['']*4)
         ax.set_yticks(np.linspace(0.0,0.6,4))
         ax.set_yticklabels(['0','0.2','0.4','0.6'])
         for tick in ax.get_xticklabels():
@@ -480,7 +463,7 @@ def tispectrum():
         ax.set_xlim(0,300)
         ax.set_ylim(0.0,1.0)
         ax.set_xticks([0,100,200,300])
-        ax.set_xticklabels(['$\Gamma$','$X_1$','$M_1$','$\Gamma$'])
+        ax.set_xticklabels(['$\Gamma$','$X$','$M$','$\Gamma$'])
         ax.set_yticks([0.0,0.5,1.0])
         ax.set_yticklabels(['0.0','0.5','1.0'])
         for tick in ax.get_xticklabels():
@@ -508,14 +491,9 @@ def tispectrum():
         for (x1,y1),(x2,y2) in [(p1,p2),(p2,p3),(p3,p4),(p4,p1)]:
             ax.plot([x1,x2],[y1,y2],lw=2,color='black')
         ax.text(-0.04,+0.00,'$\Gamma$',ha='right',va='center',fontsize=14,color='black')
-        ax.text(+1.08,+1.00,'$M_1$',ha='left',va='center',fontsize=14,color='black')
-        ax.text(-1.08,+1.00,'$M_2$',ha='right',va='center',fontsize=14,color='black')
-        ax.text(-1.08,-1.00,'$M_3$',ha='right',va='center',fontsize=14,color='black')
-        ax.text(+1.08,-1.00,'$M_4$',ha='left',va='center',fontsize=14,color='black')
-        ax.text(+1.08,+0.00,'$X_1$',ha='left',va='center',fontsize=14,color='black')
-        ax.text(-1.08,+0.00,'$X_2$',ha='right',va='center',fontsize=14,color='black')
-        ax.text(+0.00,+1.08,'$Y_1$',ha='center',va='bottom',fontsize=14,color='black')
-        ax.text(+0.00,-1.08,'$Y_2$',ha='center',va='top',fontsize=14,color='black')
+        ax.text(+1.08,+1.00,'$M$',ha='left',va='center',fontsize=14,color='black')
+        ax.text(+1.08,+0.00,'$X$',ha='left',va='center',fontsize=14,color='black')
+        ax.text(+0.00,+1.08,'$Y$',ha='center',va='bottom',fontsize=14,color='black')
         for x,y in ([0.0,0.0],[1.0,1.0],[-1.0,1.0],[-1.0,-1.0],[1.0,-1.0],[1.0,0.0],[-1.0,0.0],[0.0,1.0],[0.0,-1.0]):
             ax.scatter(x,y,s=50,edgecolors='none',color='purple',alpha=0.8,marker='o',zorder=3)
         pos1,pos2=data[0:100,1].argmax()*1.0/100,data[100:200,1].argmax()*1.0/100
@@ -524,10 +502,7 @@ def tispectrum():
                     [pos2,1.0],[-pos2,1.0],[pos2,-1.0],[-pos2,-1.0],
                     [0.5,0.5],[-0.5,0.5],[-0.5,-0.5],[0.5,-0.5]):
             ax.scatter(x,y,s=50,edgecolors='none',color='red',alpha=0.8,marker='o',zorder=3)
-        ax.text(+0.5,+0.54,'$O_1$',ha='center',va='bottom',fontsize=14,color='black')
-        ax.text(-0.5,+0.54,'$O_2$',ha='center',va='bottom',fontsize=14,color='black')
-        ax.text(-0.5,-0.54,'$O_3$',ha='center',va='bottom',fontsize=14,color='black')
-        ax.text(+0.5,-0.54,'$O_4$',ha='center',va='bottom',fontsize=14,color='black')
+        ax.text(+0.5,+0.54,'$O$',ha='center',va='bottom',fontsize=14,color='black')
         if i==0:
             ax.annotate(s='',xy=[+0.0,+0.0],xytext=[+0.5,+0.5],arrowprops={'color':'green','linewidth':2.5,'arrowstyle':'<-','zorder':2,'alpha':0.7})
             ax.annotate(s='',xy=[-1.0,-1.0],xytext=[-0.5,-0.5],arrowprops={'color':'green','linewidth':2.5,'arrowstyle':'<-','zorder':2,'alpha':0.7})
