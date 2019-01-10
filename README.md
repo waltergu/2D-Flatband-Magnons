@@ -15,8 +15,8 @@ We study the spin-1 excitation spectra of the flatband ferromagnetic phases in i
 
 Paper online
 ------------
-https://arxiv.org/abs/1810.11986
-https://journals.aps.org/prb/abstract/10.1103/PhysRevB.99.014407
+* https://arxiv.org/abs/1810.11986
+* https://journals.aps.org/prb/abstract/10.1103/PhysRevB.99.014407
 
 Source online
 -------------
