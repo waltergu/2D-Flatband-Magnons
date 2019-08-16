@@ -1,5 +1,5 @@
 # 2D-Flatband-Magnons
-Two dimensional itinerant magnons in topological nearly flat bands.
+Two dimensional itinerant magnons in nearly flat topological bands.
 
 Authors
 -------
