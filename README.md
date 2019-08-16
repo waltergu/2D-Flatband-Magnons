@@ -20,7 +20,7 @@ Paper online
 
 Source online
 -------------
-https://github.com/waltergu/2DTFBM
+https://github.com/waltergu/2D-Flatband-Magnons
 
 Contact
 -------
