@@ -1,5 +1,5 @@
-# 2DTFBM
-Two dimensional topologial flat band magnons.
+# 2D-Flatband-Magnons
+Two dimensional itinerant magnons in topological nearly flat bands.
 
 Authors
 -------
